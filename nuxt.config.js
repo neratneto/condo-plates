@@ -4,15 +4,13 @@ import pkg from './package'
 export default {
   mode: 'spa',
 
-  /*
-  ** Headers of the page
-  */
+  // ** Headers of the page
   head: {
-    title: pkg.name,
+    title: 'Placas do condomínio',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: 'Nós queremos faciliatar a vida do seu porteiro. Para isso traremos praticidade e agilidade na hora de reconhecer os carros dos moradores. Assim, criamos este painel online para organizar e acessar as placas dos moradores do seu condomínio.' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -24,34 +22,27 @@ export default {
     ]
   },
 
-  /*
-  ** Customize the progress-bar color
-  */
+  // ** Customize the progress-bar color
   loading: { color: '#fff' },
 
-  /*
-  ** Global CSS
-  */
+  // ** Global CSS
   css: [
     '~/assets/style/app.styl'
   ],
 
-  /*
-  ** Plugins to load before mounting the App
-  */
+  // ** Plugins to load before mounting the App
   plugins: [
-    '@/plugins/vuetify'
+    '@/plugins/vuetify',
+    '~/plugins/confirm/confirm.js',
+    // Environment variables configuration file (export object Env with configs)
+    'envSettings.js'
   ],
 
-  /*
-  ** Nuxt.js modules
-  */
+  // ** Nuxt.js modules
   modules: [
   ],
 
-  /*
-  ** Build configuration
-  */
+  // ** Build configuration
   build: {
     transpile: ['vuetify/lib'],
     plugins: [new VuetifyLoaderPlugin()],
@@ -59,20 +50,18 @@ export default {
       stylus: {
         import: ['~assets/style/variables.styl']
       }
+    },
+    // ** You can extend webpack config here
+    extend(config, ctx) {
+      // Run ESLint on save
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
     }
-    /*
-    ** You can extend webpack config here
-    */
-    // extend(config, ctx) {
-    //   // Run ESLint on save
-    //   if (ctx.isDev && ctx.isClient) {
-    //     config.module.rules.push({
-    //       enforce: 'pre',
-    //       test: /\.(js|vue)$/,
-    //       loader: 'eslint-loader',
-    //       exclude: /(node_modules)/
-    //     })
-    //   }
-    // }
   }
 }

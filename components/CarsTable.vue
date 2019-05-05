@@ -9,7 +9,7 @@
       {{ props.item.house }}
     </td>
     <td>
-      <v-btn @click="deleteCar(props.item.id)" icon>
+      <v-btn icon @click="deleteCar(props.item)">
         <v-icon>clear</v-icon>
       </v-btn>
     </td>
@@ -26,6 +26,9 @@
 import { db } from '../plugins/firebase'
 
 export default {
+  props: {
+    search: { type: String, default: null }
+  },
   data: () => ({
     cars: [],
     headers: [
@@ -35,24 +38,23 @@ export default {
       { text: 'Deletar', sortable: false }
     ]
   }),
-  props: {
-    search: String
+  mounted() {
+    this.getCars()
   },
   methods: {
     getCars() {
-      db.collection('cars').onSnapshot(querySnapshot => {
+      db.collection('cars').onSnapshot((querySnapshot) => {
         this.cars = []
-        querySnapshot.forEach(doc => {
+        querySnapshot.forEach((doc) => {
           this.cars.push({ ...doc.data(), id: doc.id })
         })
       })
     },
-    deleteCar(id) {
-      db.collection('cars').doc(id).delete()
+    deleteCar(car) {
+      this.$confirm({ message: `Deseja mesmo deletar ${car.name}, placa ${car.plate}` }).then(() => {
+        db.collection('cars').doc(car.id).delete()
+      })
     }
-  },
-  mounted() {
-    this.getCars()
   }
 }
 </script>

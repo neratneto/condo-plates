@@ -82,3 +82,9 @@ dist
 
 # Service worker
 sw.*
+
+# Enviorntment variables configuration file
+envSettings.js
+
+# Firebase cache files
+.firebase/

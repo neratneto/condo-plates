@@ -1,25 +1,29 @@
 <template>
 <v-dialog v-model="dialog">
   <v-btn slot="activator">
-    add car
+    Adicionar carro
   </v-btn>
   <v-card>
     <v-card-title>Adicionar carro</v-card-title>
     <v-card-text>
       <v-text-field v-model="formObject.name" clearable label="Carro" />
       <v-text-field v-model="formObject.plate" clearable label="Placa" />
-      <v-text-field @keyup.enter="submit" v-model="formObject.house" clearable label="Casa" />
+      <v-text-field v-model="formObject.house" clearable label="Casa" @keyup.enter="submit" />
     </v-card-text>
     <v-card-actions>
-      <v-btn color="primary" @click="submit">Confirmar</v-btn>
-      <v-btn @click="resetAndClose">Cancelar</v-btn>
+      <v-btn color="primary" @click="submit">
+        Confirmar
+      </v-btn>
+      <v-btn @click="resetAndClose">
+        Cancelar
+      </v-btn>
     </v-card-actions>
   </v-card>
 </v-dialog>
 </template>
 
 <script>
-import { db } from '../plugins/firebase';
+import { db } from '../plugins/firebase'
 
 export default {
   data: () => ({

@@ -1,15 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
-const firebaseConfig = {
-  apiKey: 'XXX',
-  authDomain: 'XXX',
-  databaseURL: 'XXX',
-  projectId: 'XXX',
-  storageBucket: 'XXX',
-  messagingSenderId: 'XXX',
-  appId: 'XXX'
-}
+const firebaseConfig = Env.firebase // eslint-disable-line no-undef
 
 firebase.initializeApp(firebaseConfig)
 

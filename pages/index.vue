@@ -1,13 +1,12 @@
 <template>
-<v-container>
+<v-container class="pa-0">
   <v-card>
     <v-card-title>
-      Carros
+      Carros cadastrados
       <v-spacer />
       <add-car />
-      <v-spacer />
-      <v-text-field v-model="search" append-icon="search" label="Busca" solo hide-details />
     </v-card-title>
+    <v-text-field v-model="search" append-icon="search" label="Busca" box hide-details />
     <cars-table :search="search" />
   </v-card>
 </v-container>
